@@ -2,11 +2,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     document.body.append(showRWDInfo())
     document.body.append(showTagInformation())
-    document.body.append(createToolButton('z-index list', '30px', showZIndex()))
-    document.body.append(createToolButton('color palettes', '60px', showColorPalettes()))
-
+    document.body.append(createToolButton('z-index list', '60px', showZIndex()))
+    document.body.append(createToolButton('color palettes', '90px', showColorPalettes()))
+    document.body.append(createToolButton('github', '30px', null, () => {
+        window.open('https://github.com/highQ77/web-inspector', '_blank')
+    }))
 })
-
 
 /** tool buttons functions */
 
@@ -106,7 +107,7 @@ function showTagInformation() {
     return infoPanel
 }
 
-function createToolButton(label, bottom, content) {
+function createToolButton(label, bottom, content, callback) {
     const toolButton = document.createElement('div')
     toolButton.style.display = 'flex'
     toolButton.style.position = 'fixed'
@@ -129,6 +130,7 @@ function createToolButton(label, bottom, content) {
     toolButton.onclick = () => {
         removeToolCover();
         createToolCover(content)
+        callback && callback()
     }
     return toolButton
 }
